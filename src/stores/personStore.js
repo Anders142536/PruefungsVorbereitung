@@ -29,10 +29,13 @@ export const usePersonStore = defineStore('persons', () => {
     });
   }
 
+  async function getSinglePerson(id) {
+    const response = await axios.get(url + 'users/' + id);
+  }
 
   function increment() {
     count.value++;
   }
 
-  return { persons, sonstiges, loadAllUsers, addPerson, deletePerson, updatePerson, increment };
+  return { persons, sonstiges, loadAllUsers, addPerson, deletePerson, updatePerson, getSinglePerson, increment };
 });

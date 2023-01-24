@@ -1,13 +1,21 @@
 <script setup>
 import { usePersonStore } from '../stores/personStore.js';
-import FillInTable from '../components/FillInTable.vue'
+import FillInTable from '../components/FillInTable.vue';
+import SinglePersonView from '../views/SinglePersonView.vue';
 import { onMounted } from 'vue';
+import {useRouter} from 'vue-router'
 
 const store = usePersonStore();
+const router = useRouter();
 
 onMounted(async () => {
   await store.loadAllUsers();
 });
+
+function singleUser(person){
+  // stopPropagation();
+  router.push('/'+person.userId)
+}
 
 </script>
 
@@ -22,7 +30,7 @@ onMounted(async () => {
       <td>Button</td>
     </thead>
     <tbody>
-      <FillInTable v-for="person in store.persons" :person="person"></FillInTable>
+      <FillInTable v-for="person in store.persons" :person="person" @click.stop=singleUser(person)></FillInTable>
     </tbody>
   </table>
 </template>

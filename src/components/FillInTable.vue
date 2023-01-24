@@ -12,7 +12,6 @@ const birthYear = ref('');
 
 function toggle(){
   isVisible.value = !isVisible.value;
-  console.log(isVisible);
 }
 
 const props = defineProps({
@@ -38,15 +37,15 @@ async function personUpdate(person){
     <td>{{props.person.firstName}}</td>
     <td>{{props.person.lastName}}</td>
     <td>{{props.person.birthYear}}</td>
-    <td><button class="btn btn-warning" @click="toggle">Bearbeiten</button></td>
+    <td><button class="btn btn-warning" @click.stop="toggle">Bearbeiten</button></td>
     <td><button class="btn btn-danger" @click="deleteP(person)">Löschen</button></td>
   </tr>
   <tr v-else>
     <td>{{props.person.userId}}</td>
-    <td><input type="text" v-model="firstName" :placeholder="person.firstName" /></td>
-    <td><input type="text" v-model="lastName" :placeholder="person.lastName"/></td>
-    <td><input type="text" v-model="birthYear" :placeholder="person.birthYear"/></td>
-    <td><button class="btn btn-success" @click="personUpdate(person)">Speichern</button></td>
+    <td><input type="text" v-model="firstName" :placeholder="person.firstName" @click.stop /></td>
+    <td><input type="text" v-model="lastName" :placeholder="person.lastName" @click.stop/></td>
+    <td><input type="text" v-model="birthYear" :placeholder="person.birthYear" @click.stop/></td>
+    <td><button class="btn btn-success" @click.stop="personUpdate(person)">Speichern</button></td>
     <td><button class="btn btn-danger" @click="deleteP(person)">Löschen</button></td>
   </tr>
 </template>
